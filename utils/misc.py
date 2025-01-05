@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+# from mpl_toolkits.mplot3d import Axes3D
 import random
 import torch
 import torch.nn as nn
@@ -296,9 +296,9 @@ def get_ptcloud_img(ptcloud):
 
     x, z, y = ptcloud.transpose(1, 0)
     try:
-        ax = fig.gca(projection=Axes3D.name, adjustable="box")
+        ax = fig.gca(projection='3d', adjustable="box")
     except:
-        ax = fig.add_subplot(projection=Axes3D.name, adjustable="box")
+        ax = fig.add_subplot(projection='3d', adjustable="box")
     ax.axis("off")
 
     ax.view_init(30, 45)
