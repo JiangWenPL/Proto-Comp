@@ -120,3 +120,38 @@ def demo(
     os.makedirs(path_tosave, exist_ok=True)
 
     savePC(partial, samples, path_tosave)
+
+    import viser
+    import time
+
+    server = viser.ViserServer(port=9082)
+    base_frame = server.scene.add_frame(
+        "/frames",
+        # wxyz=tf.SO3.exp(np.array([np.pi / 2.0, 0.0, 0.0])).wxyz,
+        position=(0, 0, 0),
+        show_axes=True,
+    )
+
+    partial = partial[0].detach().cpu().numpy()
+    samples = samples[0].detach().cpu().numpy()
+
+    colors_partial = np.zeros_like(partial)
+    colors_partial[:, 0] = 0.8
+    server.scene.add_point_cloud(
+                "/frames/partial",
+                points=partial,
+                point_size=0.005,
+                colors=colors_partial,
+            )
+
+    colors_complete = np.zeros_like(samples)
+    colors_complete[:, 2] = 0.8
+    server.scene.add_point_cloud(
+                "/frames/complete",
+                points=samples,
+                point_size=0.005,
+                colors=colors_complete,
+            )
+
+    while True:
+        time.sleep(0.01)
