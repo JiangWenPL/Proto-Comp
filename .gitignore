@@ -142,6 +142,9 @@ data/PCN/val
 data/real_sensors_benchmark
 data/ShapeNet55/shapenet_pc
 !extensions/chamfer_dist/
+*.npy
+*.pth
+*.pt
 
 
 
