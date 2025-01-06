@@ -7,6 +7,7 @@ setup(
         "models.point_e.diffusion",
         "models.point_e.models",
         "models.point_e.util",
+        "pc_infer",
     ],
     install_requires=[
         "argparse",

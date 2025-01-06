@@ -1,6 +1,7 @@
 import torch
 import os
-from utils.logger import *
+# from utils.logger import *
+from utils.logger import get_logger, print_log
 import numpy as np
 import open3d as o3d
 from models.point_e.diffusion.configs import DIFFUSION_CONFIGS, diffusion_from_config
@@ -22,6 +23,14 @@ def pc_norm(pc):
     m = np.max(np.sqrt(np.sum(pc**2, axis=1))) * 2
     pc = pc / m
     return pc
+
+def pc_norm_stats(pc):
+    """pc: NxC, return NxC"""
+    centroid = np.mean(pc, axis=0)
+    pc = pc - centroid
+    m = np.max(np.sqrt(np.sum(pc**2, axis=1))) * 2
+    pc = pc / m
+    return pc, centroid, m
 
 
 def savePC(partial, samples, save_path):

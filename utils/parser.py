@@ -3,7 +3,7 @@ import argparse
 from pathlib import Path
 
 
-def get_args():
+def get_args(args_str=None):
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", type=str, help="yaml config file")
     parser.add_argument(
@@ -30,8 +30,8 @@ def get_args():
     parser.add_argument(
         "--init_weights", type=str, help="The initialization weights of ProtoComp model"
     )
-    parser.add_argument("--prompt", type=str, help="The prompt for demo.")
-    parser.add_argument("--pc_path", type=str, help="The point cloud path for demo.")
+    parser.add_argument("--prompt", type=str, help="The prompt for demo.", default="")
+    parser.add_argument("--pc_path", type=str, help="The point cloud path for demo.", default="")
 
     parser.add_argument(
         "--exp_name", type=str, default="default", help="experiment name"
@@ -59,7 +59,7 @@ def get_args():
         default=None,
         help="difficulty mode for shapenet",
     )
-    args = parser.parse_args()
+    args = parser.parse_args(args_str)
 
     if args.test and args.resume:
         raise ValueError("--test and --resume cannot be both activate")
